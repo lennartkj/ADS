@@ -301,9 +301,190 @@ graph TD
 
 ```
 
-> **Speichern** als `baum_ord1.md` und auf GitHub oder einem anderen Markdown‑Renderer mit Mermaid‑Support öffnen.  
-> Du kannst einzelne Details ein- oder ausklappen; die Diagramme passen sich automatisch an.
+
+
+> **Maximale Schlüsselzahl pro Knoten** (Ordnung 3)
+> $2·m = 2·3 = 6$ – erst bei **7 Schlüsseln** wird gesplittet.
+
+
+# B‑Baum Ordnung 3 – Zwischenschritte
+
+<details>
+<summary>Schritt 1 · insert(<strong>11</strong>)</summary>
+
+```mermaid
+graph TD
+    Root["11"]
+````
+
+</details>
+
+<details>
+<summary>Schritt 2 · insert(<strong>12</strong>)</summary>
+
+```mermaid
+graph TD
+    Root["11 12"]
 ```
+
+</details>
+
+<details>
+<summary>Schritt 3 · insert(<strong>20</strong>)</summary>
+
+```mermaid
+graph TD
+    Root["11 12 20"]
+```
+
+</details>
+
+<details>
+<summary>Schritt 4 · insert(<strong>15</strong>) → erster Split</summary>
+
+```mermaid
+graph TD
+    Root15["15"]
+    L1112["11 12"]
+    R20["20"]
+
+    Root15 --- L1112
+    Root15 --- R20
+```
+
+</details>
+
+<details>
+<summary>Schritt 5 · insert(<strong>60</strong>)</summary>
+
+```mermaid
+graph TD
+    Root15["15"]
+    L1112["11 12"]
+    R2060["20 60"]
+
+    Root15 --- L1112
+    Root15 --- R2060
+```
+
+</details>
+
+<details>
+<summary>Schritt 6 · insert(<strong>10</strong>)</summary>
+
+```mermaid
+graph TD
+    Root15["15"]
+    L101112["10 11 12"]
+    R2060["20 60"]
+
+    Root15 --- L101112
+    Root15 --- R2060
+```
+
+</details>
+
+<details>
+<summary>Schritt 7 · insert(<strong>18</strong>)</summary>
+
+```mermaid
+graph TD
+    Root15["15"]
+    L101112["10 11 12"]
+    R182060["18 20 60"]
+
+    Root15 --- L101112
+    Root15 --- R182060
+```
+
+</details>
+
+<details>
+<summary>Schritt 8 · insert(<strong>14</strong>)</summary>
+
+```mermaid
+graph TD
+    Root15["15"]
+    L10111214["10 11 12 14"]
+    R182060["18 20 60"]
+
+    Root15 --- L10111214
+    Root15 --- R182060
+```
+
+</details>
+
+<details>
+<summary>Schritt 9 · insert(<strong>5</strong>)</summary>
+
+```mermaid
+graph TD
+    Root15["15"]
+    L510111214["5 10 11 12 14"] %% 5 Keys ⇒ noch im Limit (≤ 6)
+    R182060["18 20 60"]
+
+    Root15 --- L510111214
+    Root15 --- R182060
+```
+
+</details>
+
+<details>
+<summary>Schritt 10 · insert(<strong>2</strong>)</summary>
+
+```mermaid
+graph TD
+    Root15["15"]
+    L2510111214["2 5 10 11 12 14"] %% 6 Keys ⇒ immer noch ok
+    R182060["18 20 60"]
+
+    Root15 --- L2510111214
+    Root15 --- R182060
+```
+
+*Hinweis:* Das Blatt hat jetzt die (ordnungsgemäß) **maximal erlaubten 6 Schlüssel**.
+Der nächste Einfügevorgang zwingt zum Split.
+
+</details>
+
+<details>
+<summary>Schritt 11 · insert(<strong>1</strong>) → Split &amp; Promotion</summary>
+
+```mermaid
+graph TD
+    Root1015["10 15"]
+    L125["1 2 5"]
+    M111214["11 12 14"]
+    R182060["18 20 60"]
+
+    Root1015 --- L125
+    Root1015 --- M111214
+    Root1015 --- R182060
+```
+
+</details>
+
+---
+
+## Endbaum (alle 11 Schlüssel)
+
+```mermaid
+graph TD
+    Root1015["10 15"]
+    L125["1 2 5"]
+    M111214["11 12 14"]
+    R182060["18 20 60"]
+
+    Root1015 --- L125
+    Root1015 --- M111214
+    Root1015 --- R182060
+```
+
+> *Alle Knoten erfüllen Ordnung 3: höchstens 6 und mindestens 3 Schlüssel in Blättern (außer Wurzel),
+> die Suchbaumeigenschaft bleibt erhalten, alle Blätter liegen auf gleicher Ebene.*
+
+```
+
 
 
 
