@@ -33,48 +33,6 @@ Einfügen 1
 
 
 
-# Übung 13 · Aufgabe 1 (a)  
-**B‑Baum der Ordnung 1 – alle Zwischenzustände**
-
-> **Regeln Ordnung 1**  
-> * Jeder Knoten darf höchstens **1** Schlüssel enthalten (Ausnahme Wurzel: ≤ 1).  
-> * Beim Überlauf (Einfügen des 2. Schlüssels in einen Nicht‑Wurzel­knoten)  
->   wird gesplittet – der zusätzliche Schlüssel steigt eine Ebene nach oben.  
-> * Blätter können auf unterschiedlicher Höhe liegen; der Baum bleibt jedoch stets balanciert.
-
----
-
-| Schritt | Operation | Baum (ASCII‑Skizze) |
-|:--|:--|:--|
-| **0** | _Start (leer)_ |  |
-| **1** | `insert(11)` | ```      11  ``` |
-| **2** | `insert(12)` | ```      11 ─► 12  ``` |
-| **3** | `insert(20)` | ```      11 ─► 12 ─► 20  ``` |
-| **4** | `insert(15)` | ```      11 ─► 12 ─► 20      │              │              └── 15  ``` |
-| **5** | `insert(60)` | ```      11 ─► 12 ─► 20      │              │        ┌──── 15      └──── 60  ``` |
-| **6** | `insert(10)`<br>_Split bei Blatt 11_ | ```            10          ╱     ╲       11 ─► 12 ─► 20             │              └── 15, 60  ``` |
-| **7** | `insert(18)` | ```            10          ╱     ╲       11 ─► 12 ─► 20             │        ┌── 15 ─► 18             └── 60  ``` |
-| **8** | `insert(14)` | ```            10          ╱     ╲       11 ─► 12 ─► 20             │        ┌── 14 ─► 15 ─► 18             └── 60  ``` |
-| **9** | `insert(5)`<br>_Split bei Blatt 10_ | ```                  11               ╱        ╲            5            12 ─► 20        │                │ 2. Ebene:      │               ┌── 14 ─► 15 ─► 18               └── 60                      (Blatt 5 steht links)  ``` |
-| **10** | `insert(2)` | ```                  11               ╱        ╲            5            12 ─► 20         │       │                │    ┌── 2               ┌── 14 ─► 15 ─► 18               └── 60  ``` |
-| **11** | `insert(1)` | ```                  11               ╱        ╲            5            12 ─► 20         │       │                │ 1 ─► 2               ┌── 14 ─► 15 ─► 18               └── 60  ``` |
-
----
-
-## Endzustand (alle 11 Schlüssel)
-
-```text
-          11
-       ╱       ╲
-      5         12 ─► 20
-   ╱   ╲           ╱      ╲
- 1 ─► 2              14 ─► 15 ─► 18    60
-
-
-
-Unten erhältst du ein **komplettes Markdown‑Dokument** mit **Mermaid‑Diagrammen** für **jeden einzelnen Einfüge­schritt** (Ordnung 1, Schlüssel 11 → 1).
-Die Diagramme sind in `<details>`‑Blöcke gepackt – so bleibt die Datei kompakt, aber du kannst jeden Schritt ausklappen.
-
 > **Nutzen**
 >
 > * Die Datei lässt sich direkt auf GitHub, GitLab, StackEdit, VS Code Preview usw. anzeigen.
@@ -255,7 +213,7 @@ graph TD
     L12["12"]
     R20["20"]
 
-    LL251011["2 5 10 11"] %% übervoll aber noch nicht gesplittet in dieser Skizze
+    LL251011["2 5 10 11"] 
     LM14["14"]
     RL18["18"]
     RR60["60"]
